@@ -18,6 +18,12 @@ public class AuthorController {
     @Autowired
     private AuthorRepository authorRepository ;
 
+    @RequestMapping("/showform")
+    public String showForm(Model model){
+        model.addAttribute("author",new Author());
+        return "inp";
+    }
+
     @GetMapping("/add")
     public @ResponseBody String addAuthor(@RequestParam("firstname") String firstName,
                                           @RequestParam("lastname") String lastName,
@@ -26,6 +32,7 @@ public class AuthorController {
         authorRepository.save(author) ;
         return "saved" ;
     }
+
 
     @GetMapping("/all")
     public @ResponseBody Iterable<Author> allAuthors(){
